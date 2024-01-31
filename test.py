@@ -8,8 +8,8 @@ activated_dataframe = dataframe.active
 
 def add_to_whatsapp_group(number):
     
-
-    url = "https://gate.whapi.cloud/groups/8801722757965-1474691203%40g.us/participants"
+    grpupId = 'your whatsapp group id'
+    url = f"https://gate.whapi.cloud/groups/{groupId}/participants"
 
     payload = { "participants": [number] }
     headers = {
@@ -33,7 +33,7 @@ for row in range(1, activated_dataframe.max_row):
         # print(col[row].value)
         response = add_to_whatsapp_group(str(col[row].value))
         processed = json.loads(response.text).get('processed',[])
-        if response.ok and len(processed)>0:
+        if response.ok and len(processed)> 0:
             succeed+=1
             print(f"{col[row].value}: successfully added")
         elif response.status_code==409:
